@@ -1,13 +1,18 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
+import HeroContext from "../../Context/HeroContext";
+import Character from "../Character/Character";
+import { SectionWrapper, CharacterWrapper } from "./Characters.styles";
 
 const Characters = () => {
   const [characters, setCharacters] = useState([]);
-  const [count, setCount] = useState(0);
+  const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
+  const [heroText, setHeroText] = useContext(HeroContext);
 
   useEffect(() => {
     getCharacters();
+    setHeroText("The Rick and Morty");
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   async function getCharacters() {
@@ -15,15 +20,17 @@ const Characters = () => {
     const query = {
       query: `{
         characters {
-          info {
-            count
-          }
           results {
             id
             name
             status
             species
             gender
+            image
+            location {
+              id
+              name
+            }
           }
         }
       }`,
@@ -37,34 +44,27 @@ const Characters = () => {
         url: endpoint,
         data: query,
       });
-      setCount(data.characters.info.count);
       setCharacters(data.characters.results);
+      setLoading(false);
     } catch (e) {
       setError(true);
     }
   }
 
+  if (loading) {
+    return <h2>Loading ...</h2>;
+  }
+
   return (
-    <div>
-      <span>{count}</span>
-      <ul>
-        {characters.length > 0
-          ? characters.map((character) => {
-              return (
-                <li key={character.id}>
-                  <span>{character.status}</span>
-                  <h2>{character.name}</h2>
-                  <span>
-                    {character.species} | {character.gender}
-                  </span>
-                </li>
-              );
+    <SectionWrapper>
+      <CharacterWrapper>
+        {!error
+          ? characters.slice(0, 12).map((character) => {
+              return <Character key={character.id} character={character} />;
             })
-          : error
-          ? "Cannot load characters"
-          : "Loading..."}
-      </ul>
-    </div>
+          : "Cannot load characters"}
+      </CharacterWrapper>
+    </SectionWrapper>
   );
 };
 

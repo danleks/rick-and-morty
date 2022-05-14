@@ -2,12 +2,14 @@ import axios from "axios";
 import { useEffect, useState, useContext } from "react";
 import HeroContext from "../../Context/HeroContext";
 import Character from "../Character/Character";
+import Filters from "../Filters/Filters";
 import { SectionWrapper, CharacterWrapper } from "./Characters.styles";
 
 const Characters = () => {
   const [characters, setCharacters] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
+  const [species, setSpecies] = useState([]);
   const [heroText, setHeroText] = useContext(HeroContext);
 
   useEffect(() => {
@@ -44,8 +46,15 @@ const Characters = () => {
         url: endpoint,
         data: query,
       });
+
       setCharacters(data.characters.results);
       setLoading(false);
+      const species = [
+        ...new Set(
+          data.characters.results.map((character) => character.species)
+        ),
+      ];
+      setSpecies(species);
     } catch (e) {
       setError(true);
     }
@@ -57,6 +66,7 @@ const Characters = () => {
 
   return (
     <SectionWrapper>
+      <Filters species={species} />
       <CharacterWrapper>
         {!error
           ? characters.slice(0, 12).map((character) => {

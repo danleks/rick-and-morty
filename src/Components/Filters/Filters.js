@@ -1,13 +1,31 @@
 import { useEffect, useState, useContext } from "react";
+import { FiltersContext } from "../../providers/FiltersProvider";
+import { CharactersContext } from "../../providers/CharactersProvider";
 
 const STATUS = ["", "alive", "dead", "unknown"];
 const GENDER = ["", "female", "male", "genderless", "unknown"];
+const SPECIES = ["", "Human", "Alien"];
 
-const Filters = ({ species }) => {
+const Filters = () => {
   const [character, setCharacter] = useState("");
   const [status, setStatus] = useState("");
   const [gender, setGender] = useState("");
   const [speciesItem, setSpeciesItem] = useState("");
+  const [, setCurrentFilters] = useContext(FiltersContext);
+
+  const { getCharacters } = useContext(CharactersContext);
+
+  useEffect(() => {
+    const filterData = {
+      page: 1,
+      name: character,
+      status,
+      species: speciesItem,
+      gender,
+    };
+    setCurrentFilters(filterData);
+    getCharacters(filterData);
+  }, [character, status, gender, speciesItem]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <form>
@@ -36,7 +54,7 @@ const Filters = ({ species }) => {
         </select>
       </label>
       <label htmlFor="gender">
-        status
+        gender
         <select
           id="gender"
           value={gender}
@@ -58,14 +76,13 @@ const Filters = ({ species }) => {
           onChange={(e) => setSpeciesItem(e.target.value)}
           onBlur={(e) => setSpeciesItem(e.target.value)}
         >
-          {species.map((item) => (
+          {SPECIES.map((item) => (
             <option key={item} value={item}>
               {item}
             </option>
           ))}
         </select>
       </label>
-      <button>Find characters</button>
     </form>
   );
 };

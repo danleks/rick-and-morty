@@ -1,5 +1,5 @@
 import axios from "axios";
-import HeroContext from "../../Context/HeroContext";
+import { HeroContext } from "../../providers/HeroProvider";
 import { useState, useEffect, useContext } from "react";
 import { useParams } from "react-router-dom";
 import { StatusIndicator } from "../StatusIndicator/StatusIndicator";
@@ -17,10 +17,9 @@ const CharacterDetails = () => {
   const { id } = useParams();
   const [loading, setLoading] = useState(true);
   const [character, setCharacter] = useState("");
-  const [heroText, setHeroText] = useContext(HeroContext);
+  const [, setHeroText] = useContext(HeroContext);
 
   useEffect(() => {
-    console.log(id);
     getCharacter();
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 

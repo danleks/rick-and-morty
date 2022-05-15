@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { SectionWrapper } from "./Hero.styles";
-import HeroContext from "../../Context/HeroContext";
+import { HeroContext } from "../../providers/HeroProvider";
 
 const Hero = () => {
   const [heroText] = useContext(HeroContext);

@@ -45,6 +45,7 @@ const Character = ({
           <span>{gender}</span>
         </InnerContent>
       </ContentWrapper>
+      <button>add to fav</button>
     </CharacterWrapper>
   );
 };

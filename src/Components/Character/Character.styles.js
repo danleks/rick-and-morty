@@ -80,3 +80,16 @@ export const LinkStyles = styled(Link)`
     color: ${({ theme }) => theme.colors.orange};
   }
 `;
+
+export const ButtonStyles = styled.div`
+  align-self: flex-start;
+  cursor: pointer;
+  color: ${({ theme }) => theme.colors.red};
+  background-color: black;
+  padding: 10px;
+  &[disabled] {
+    cursor: not-allowed;
+    background-color: grey;
+    color: white;
+  }
+`;

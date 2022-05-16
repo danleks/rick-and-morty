@@ -1,4 +1,7 @@
+import { useEffect, useState, useContext } from "react";
+
 import { StatusIndicator } from "../StatusIndicator/StatusIndicator";
+
 import {
   CharacterWrapper,
   ImageWrapper,
@@ -6,6 +9,7 @@ import {
   InnerContent,
   StatusWrapper,
   LinkStyles,
+  ButtonStyles,
 } from "./Character.styles";
 
 const Character = ({
@@ -16,8 +20,11 @@ const Character = ({
     species,
     gender,
     image,
+    disabled,
     location: { name: locationName },
   },
+  favourite,
+  ...rest
 }) => {
   return (
     <CharacterWrapper>
@@ -45,7 +52,9 @@ const Character = ({
           <span>{gender}</span>
         </InnerContent>
       </ContentWrapper>
-      <button>add to fav</button>
+      <ButtonStyles disabled={disabled && !favourite} id={id} {...rest}>
+        {favourite ? "delete" : "add to favs"}
+      </ButtonStyles>
     </CharacterWrapper>
   );
 };

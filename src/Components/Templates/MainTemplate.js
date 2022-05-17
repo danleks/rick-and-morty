@@ -1,4 +1,3 @@
-import Footer from "../Footer/Footer";
 import Header from "../Header/Header";
 import Hero from "../Hero/Hero";
 
@@ -8,7 +7,6 @@ const MainTemplate = ({ children }) => {
       <Header />
       <Hero />
       {children}
-      <Footer />
     </div>
   );
 };

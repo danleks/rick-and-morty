@@ -18,7 +18,7 @@ const PaginationExtended = () => {
       breakLabel="..."
       nextLabel="next >"
       onPageChange={handlePageClick}
-      pageRangeDisplayed={5}
+      pageRangeDisplayed={3}
       pageCount={pageCount}
       previousLabel="< previous"
       renderOnZeroPageCount={null}

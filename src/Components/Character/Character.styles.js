@@ -81,12 +81,13 @@ export const LinkStyles = styled(Link)`
   }
 `;
 
-export const ButtonStyles = styled.div`
+export const ButtonStyles = styled.button`
   align-self: flex-start;
   cursor: pointer;
   color: ${({ theme }) => theme.colors.red};
   background-color: black;
   padding: 10px;
+  border: none;
   &[disabled] {
     cursor: not-allowed;
     background-color: grey;

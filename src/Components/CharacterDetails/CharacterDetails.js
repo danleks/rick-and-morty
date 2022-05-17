@@ -3,6 +3,7 @@ import { HeroContext } from "../../providers/HeroProvider";
 import { useState, useEffect, useContext } from "react";
 import { useParams } from "react-router-dom";
 import { StatusIndicator } from "../StatusIndicator/StatusIndicator";
+import { useNavigate } from "react-router-dom";
 
 import {
   DetailsWrapper,
@@ -18,6 +19,7 @@ const CharacterDetails = () => {
   const [loading, setLoading] = useState(true);
   const [character, setCharacter] = useState("");
   const [, setHeroText] = useContext(HeroContext);
+  const navigate = useNavigate();
 
   useEffect(() => {
     getCharacter();
@@ -40,7 +42,10 @@ const CharacterDetails = () => {
 
   return (
     <DetailsWrapper>
-      <BackButtonStyles to="/characters" title="go back to characters">
+      <BackButtonStyles
+        onClick={() => navigate(-1)}
+        title="go back to characters"
+      >
         ←
       </BackButtonStyles>
       <ImageWrapper>

@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 export const DetailsWrapper = styled.section`
@@ -63,7 +62,7 @@ export const InnerWrapper = styled.div`
   }
 `;
 
-export const BackButtonStyles = styled(Link)`
+export const BackButtonStyles = styled.button`
   position: absolute;
   top: 1rem;
   left: 1rem;

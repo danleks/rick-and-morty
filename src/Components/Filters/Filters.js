@@ -1,6 +1,8 @@
 import { useEffect, useState, useContext } from "react";
 import { FiltersContext } from "../../providers/FiltersProvider";
 import { CharactersContext } from "../../providers/CharactersProvider";
+import PaginationBasic from "../Pagination/Basic/PaginationBasic";
+import { FiltersWrapper } from "./Filters.styles";
 
 const STATUS = ["", "alive", "dead", "unknown"];
 const GENDER = ["", "female", "male", "genderless", "unknown"];
@@ -28,7 +30,7 @@ const Filters = () => {
   }, [character, status, gender, speciesItem]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
-    <form>
+    <FiltersWrapper>
       <label htmlFor="chatacter">
         Find character
         <input
@@ -83,7 +85,8 @@ const Filters = () => {
           ))}
         </select>
       </label>
-    </form>
+      <PaginationBasic />
+    </FiltersWrapper>
   );
 };
 

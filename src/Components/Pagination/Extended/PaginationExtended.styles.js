@@ -3,9 +3,12 @@ import styled from "styled-components";
 
 export const PaginationStyles = styled(ReactPaginate)`
   display: flex;
-  gap: 1rem;
+  justify-content: flex-end;
+  gap: 0.5rem;
+  padding: 2rem;
   list-style: none;
   color: ${({ theme }) => theme.colors.white};
+  background: ${({ theme }) => theme.colors.black};
 
   a {
     padding: 5px 8px;

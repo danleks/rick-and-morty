@@ -23,8 +23,17 @@ const PaginationBasic = () => {
 
   return (
     <PaginationStyles>
-      <input min="1" max="42" value={currentPage} onChange={handleInputField} />
-      <span>z {pageCount}</span>
+      <label htmlFor="pages">
+        Page:
+        <input
+          id="pages"
+          min="1"
+          max="42"
+          value={currentPage}
+          onChange={handleInputField}
+        />
+        <span>z {pageCount}</span>
+      </label>
     </PaginationStyles>
   );
 };

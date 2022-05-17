@@ -19,6 +19,7 @@ const Characters = () => {
   );
 
   const handleClick = (e, character) => {
+    console.log("click");
     if (+e.target.id === character.id) {
       character.disabled = true;
       setFavouriteCharacters((prevState) => [character, ...prevState]);
@@ -44,7 +45,6 @@ const Characters = () => {
   return (
     <SectionWrapper>
       <Filters />
-      <PaginationBasic />
       <CharacterWrapper>
         {!error
           ? currentCharacters.map((character) => {
